@@ -15,17 +15,28 @@ document.body.appendChild(app.view);
  function onAssetsLoaded()
  {
      // create an array of textures from an image path
-     var frames = [];
-
+     var walkFrames = [];
+     var stopFrame;
      for (var i = 1; i < 4; i++) {
          var val = i;
 
          // magically works since the spritesheet was loaded with the pixi loader
-         frames.push(PIXI.Texture.fromFrame('W' + val + '.png'));
+         walkFrames.push(PIXI.Texture.fromFrame('W' + val + '.png'));
      }
-
+     idleFrame = PIXI.Texture.fromFrame('W2.png');
      // create an AnimatedSprite (brings back memories from the days of Flash, right ?)
-     playerMan = new PIXI.extras.AnimatedSprite(frames);
+     let walk = walkFrames;
+     let stop = [walkFrames[1]];
+     //let mc = new AnimatedSprite(walk,stop);
+     
+     
+     //playerMan = new PIXI.extras.AnimatedSprite(walkFrames);
+     playerMan = new PIXI.extras.AnimatedSprite(walk,stop);
+
+     //playerMan = new AnimatedSprite(walk,stop);
+     playerMan.play(0);
+   
+     
      /*
      * An AnimatedSprite inherits all the properties of a PIXI sprite
      * so you can change its position, its anchor, mask it, etc
@@ -34,7 +45,7 @@ document.body.appendChild(app.view);
      playerMan.y = app.screen.height / 2;
      playerMan.anchor.set(0.5);
      playerMan.animationSpeed = 0.1;
-     playerMan.play();
+     playerMan.play("play");
 
      app.stage.addChild(playerMan);
 
@@ -43,6 +54,16 @@ document.body.appendChild(app.view);
 
      // Animate the rotation
      app.ticker.add(function(delta) {
+        if(playerMan.vx==0&&playerMan.vy==0){
+           // playerMan.stop();
+           playerMan.gotoAndStop(1);
+           
+        } else {
+           // playerMan.play();
+           playerMan.play();
+           playerMan.go
+           
+        }
          playerMan.x += playerMan.vx*10*delta;
          playerMan.y += playerMan.vy*10*delta;
      });
