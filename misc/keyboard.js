@@ -1,3 +1,5 @@
+'use strict';
+
 function keyboard(value) {
     let key = {};
     key.value = value;
@@ -46,3 +48,6 @@ function keyboard(value) {
 
     return key;
 }
+
+
+module.exports =  keyboard;
