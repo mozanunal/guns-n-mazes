@@ -3,7 +3,7 @@
 
 const SPEED = 10;
 
-function Man ( x, y, rotation ) {
+function Man(x, y, rotation) {
     var walkFrames = [];
     var stopFrame;
     for (var i = 1; i < 4; i++) {
@@ -30,14 +30,9 @@ function Man ( x, y, rotation ) {
 
     man.objTick = function (delta) {
         if (man.vx == 0 && man.vy == 0) {
-            // man.stop();
             man.gotoAndStop(1);
-
         } else {
-            // man.play();
             man.play();
-            man.go
-
         }
         man.x += man.vx * delta;
         man.y += man.vy * delta;

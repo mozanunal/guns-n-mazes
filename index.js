@@ -27,27 +27,18 @@ function onAssetsLoaded() {
     var GAME_STATE = GS_LOAD;
 
     // player Man
-    var playerMan = Man(app.screen.width / 2, app.screen.height / 2, 0)
+    var playerMan = Man(app.screen.width / 2, app.screen.height / 2, 0);
     app.stage.addChild(playerMan);
+    GLOBAL_SPRITES.push(playerMan);
+
+    var man1 = Man(200, 200, 0);
+    app.stage.addChild(man1);
+    GLOBAL_SPRITES.push(man1);
 
     GAME_STATE = GS_ACTIVE;
     // Animate the rotation
     app.ticker.add(function (delta) {
         if (GAME_STATE == GS_ACTIVE) {
-            if (playerMan.vx == 0 && playerMan.vy == 0) {
-                // playerMan.stop();
-                playerMan.gotoAndStop(1);
-
-            } else {
-                // playerMan.play();
-                playerMan.play();
-                playerMan.go
-
-            }
-
-            playerMan.x += playerMan.vx * delta;
-            playerMan.y += playerMan.vy * delta;
-
             playerMan.rotation = calc.getAngleTo(Mouse.getPosX(), Mouse.getPosY(), playerMan.x, playerMan.y);
 
             GLOBAL_SPRITES.forEach(function (sprite) {
