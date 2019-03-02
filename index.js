@@ -1,14 +1,16 @@
 
 const PIXI = require('pixi.js');
 const keyboard = require('./misc/keyboard');
+const drawMap = require('./src/map0');
 
 var app = new PIXI.Application({backgroundColor : 0x444444});
 document.body.appendChild(app.view);
 
 let playerMan;
-
+const blocks = ['assets/BlueMan/Dg1.png','assets/BlueMan/Dg2.png','assets/BlueMan/Dg3.png','assets/BlueMan/Dg4.png','assets/BlueMan/Dg5.png'];
 PIXI.loader
     .add('assets/BlueMan/BlueMan.json')
+    .add(blocks)
     .load(onAssetsLoaded);
 
 
@@ -22,6 +24,11 @@ PIXI.loader
 
          // magically works since the spritesheet was loaded with the pixi loader
          walkFrames.push(PIXI.Texture.fromFrame('W' + val + '.png'));
+     }
+     var blockTexts = [];
+
+     for (var i=0;i<5;i++) {
+         blockTexts[i]= new PIXI.Texture.fromImage(blocks[i]);
      }
      idleFrame = PIXI.Texture.fromFrame('W2.png');
      // create an AnimatedSprite (brings back memories from the days of Flash, right ?)
@@ -48,10 +55,19 @@ PIXI.loader
      playerMan.play("play");
 
     app.stage.addChild(playerMan);
+    console.log(blocks[0]);
 
+    drawMap(blockTexts,app);
+    
+   
     playerMan.vx = 0;
     playerMan.vy = 0;
 
+    app.stage.position.set(app.screen.width / 2,app.screen.height / 2);
+    app.stage.pivot.copy(playerMan.position);
+
+    
+     
      // Animate the rotation
      app.ticker.add(function(delta) {
         if(playerMan.vx==0&&playerMan.vy==0){
@@ -61,11 +77,14 @@ PIXI.loader
         } else {
            // playerMan.play();
            playerMan.play();
-           playerMan.go
+           //playerMan.go
            
         }
          playerMan.x += playerMan.vx*delta;
          playerMan.y += playerMan.vy*delta;
+         //console.log(playerMan.position);
+         app.stage.pivot.copy(playerMan.position);
+
      });
  }
 
