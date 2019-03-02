@@ -5,11 +5,11 @@ const keyboard = require('./misc/keyboard');
 var app = new PIXI.Application();
 document.body.appendChild(app.view);
 
- let playerMan;
+let playerMan;
 
- PIXI.loader
-     .add('assets/BlueMan/BlueMan.json')
-     .load(onAssetsLoaded);
+PIXI.loader
+    .add('assets/BlueMan/BlueMan.json')
+    .load(onAssetsLoaded);
 
 
  function onAssetsLoaded()
@@ -47,10 +47,10 @@ document.body.appendChild(app.view);
      playerMan.animationSpeed = 0.1;
      playerMan.play("play");
 
-     app.stage.addChild(playerMan);
+    app.stage.addChild(playerMan);
 
-     playerMan.vx = 0;
-     playerMan.vy=0;
+    playerMan.vx = 0;
+    playerMan.vy = 0;
 
      // Animate the rotation
      app.ticker.add(function(delta) {
@@ -71,36 +71,36 @@ document.body.appendChild(app.view);
 
 
 
- // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
- let keyObjectUp = keyboard("ArrowUp");
- let keyObjectDown = keyboard("ArrowDown");
- let keyObjectLeft = keyboard("ArrowLeft");
- let keyObjectRight = keyboard("ArrowRight");
- var MOVEMENT_VEL = 1;
+// https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
+let keyObjectUp = keyboard("ArrowUp");
+let keyObjectDown = keyboard("ArrowDown");
+let keyObjectLeft = keyboard("ArrowLeft");
+let keyObjectRight = keyboard("ArrowRight");
+var MOVEMENT_VEL = 10;
 
 
- keyObjectUp.press = () => {
-     playerMan.vy = -MOVEMENT_VEL;
- };
- keyObjectDown.press = () => {
-     playerMan.vy = MOVEMENT_VEL;
- };
- keyObjectRight.press = () => {
-     playerMan.vx = +MOVEMENT_VEL;
- };
- keyObjectLeft.press = () => {
-     playerMan.vx = -MOVEMENT_VEL;
- };
+keyObjectUp.press = () => {
+    playerMan.vy = -MOVEMENT_VEL;
+};
+keyObjectDown.press = () => {
+    playerMan.vy = MOVEMENT_VEL;
+};
+keyObjectRight.press = () => {
+    playerMan.vx = +MOVEMENT_VEL;
+};
+keyObjectLeft.press = () => {
+    playerMan.vx = -MOVEMENT_VEL;
+};
 
- keyObjectUp.release = () => {
-     playerMan.vy = 0;
- };
- keyObjectDown.release = () => {
-     playerMan.vy = 0;
- };
- keyObjectRight.release = () => {
-     playerMan.vx = 0;
- };
- keyObjectLeft.release = () => {
-     playerMan.vx = 0;
- };
+keyObjectUp.release = () => {
+    playerMan.vy = 0;
+};
+keyObjectDown.release = () => {
+    playerMan.vy = 0;
+};
+keyObjectRight.release = () => {
+    playerMan.vx = 0;
+};
+keyObjectLeft.release = () => {
+    playerMan.vx = 0;
+};
