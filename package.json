@@ -1,0 +1,22 @@
+{
+  "name": "guns-n-mazes",
+  "version": "1.0.0",
+  "description": "Open source online game about guns and mazes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mozanunal/guns-n-mazes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mozanunal/guns-n-mazes/issues"
+  },
+  "homepage": "https://github.com/mozanunal/guns-n-mazes#readme",
+  "dependencies": {
+    "pixi.js": "^5.0.0-rc.2"
+  }
+}
