@@ -32,7 +32,7 @@ function man(app, x, y, rotation) {
     }
 
     man.objTick = function (delta) {
-        man.rotation = calc.getAngleTo(Mouse.getPosX(), Mouse.getPosY(), man.x, man.y);
+        man.rotation = calc.getAngleTo(app.screen.width / 2, app.screen.height / 2, Mouse.getPosX(), Mouse.getPosY() );
         if (man.vx == 0 && man.vy == 0) {
             man.gotoAndStop(1);
         } else {

@@ -28,7 +28,6 @@ function onAssetsLoaded() {
     // Settings
     PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
     // GLOBAL
-    var GLOBAL_SPRITES = [];
     var GAME_STATE = GS_LOAD;
 
     // player Man
@@ -41,7 +40,6 @@ function onAssetsLoaded() {
     app.stage.addChild(man1);
 
     f = man1.fire();
-    app.stage.addChild(f);
 
     app.stage.position.set(app.screen.width / 2, app.screen.height / 2);
     app.stage.pivot.copy(playerMan.position);
@@ -61,8 +59,8 @@ function onAssetsLoaded() {
 
     Mouse.events.on('released', null, (buttonCode, event, mouseX, mouseY, mouseOriginX, mouseOriginY, mouseMoveX, mouseMoveY) => {
         console.log(buttonCode, mouseOriginX, mouseOriginY, mouseX, mouseY, mouseMoveX, mouseMoveY);
-        fire = playerMan.fire();
-        app.stage.addChild(fire);
+        console.log( playerMan.position.x, playerMan.position.y );
+        playerMan.fire();
         console.log(app.stage.children);
 
     });
