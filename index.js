@@ -2,7 +2,7 @@
 const PIXI = require('pixi.js');
 const keyboard = require('./misc/keyboard');
 
-var app = new PIXI.Application();
+var app = new PIXI.Application({backgroundColor : 0x444444});
 document.body.appendChild(app.view);
 
 let playerMan;
@@ -44,7 +44,7 @@ PIXI.loader
      playerMan.x = app.screen.width / 2;
      playerMan.y = app.screen.height / 2;
      playerMan.anchor.set(0.5);
-     playerMan.animationSpeed = 0.1;
+     playerMan.animationSpeed = 0.15;
      playerMan.play("play");
 
     app.stage.addChild(playerMan);
@@ -64,8 +64,8 @@ PIXI.loader
            playerMan.go
            
         }
-         playerMan.x += playerMan.vx*10*delta;
-         playerMan.y += playerMan.vy*10*delta;
+         playerMan.x += playerMan.vx*delta;
+         playerMan.y += playerMan.vy*delta;
      });
  }
 
@@ -76,7 +76,7 @@ let keyObjectUp = keyboard("ArrowUp");
 let keyObjectDown = keyboard("ArrowDown");
 let keyObjectLeft = keyboard("ArrowLeft");
 let keyObjectRight = keyboard("ArrowRight");
-var MOVEMENT_VEL = 10;
+var MOVEMENT_VEL = 4;
 
 
 keyObjectUp.press = () => {
