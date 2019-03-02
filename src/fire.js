@@ -5,7 +5,7 @@ const calc = require('../misc/calculation');
 
 const SPEED = 10;
 
-function Fire ( x, y, rotation ) {
+function Fire (app, x, y, rotation ) {
     
     var sprite = PIXI.Sprite.fromImage('assets/cat/cat.png');
     // Set the initial position
@@ -23,7 +23,7 @@ function Fire ( x, y, rotation ) {
         sprite.y += sprite.vy * delta;
         
     }
-
+    app.stage.addChild(sprite);
     return sprite;
 }
 

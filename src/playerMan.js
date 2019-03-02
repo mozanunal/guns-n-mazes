@@ -6,7 +6,7 @@ const keyboard = require('../misc/keyboard');
 const Mouse = require('pixi.js-mouse');
 const MOVEMENT_VEL = 4;
 
-function man(x, y, rotation) {
+function man(app, x, y, rotation) {
     var walkFrames = [];
     var stopFrame;
     for (var i = 1; i < 4; i++) {
@@ -28,7 +28,7 @@ function man(x, y, rotation) {
     man.fire = function () {
         var X = man.x + calc.getAngleX(70, man.rotation + calc.degree2Radian(40));
         var Y = man.y + calc.getAngleY(70, man.rotation + calc.degree2Radian(40));
-        return Fire(X, Y, man.rotation);
+        return Fire(app, X, Y, man.rotation);
     }
 
     man.objTick = function (delta) {
@@ -74,6 +74,7 @@ function man(x, y, rotation) {
         man.vx = 0;
     };
 
+    app.stage.addChild(man);
     return man;
 
 }

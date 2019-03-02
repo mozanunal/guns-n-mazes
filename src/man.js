@@ -7,7 +7,7 @@ const calc = require('../misc/calculation');
 
 const SPEED = 10;
 
-function Man(x, y, rotation) {
+function Man(app, x, y, rotation) {
     var walkFrames = [];
     var stopFrame;
     for (var i = 1; i < 4; i++) {
@@ -30,7 +30,7 @@ function Man(x, y, rotation) {
     man.fire = function ( ) {
         var X = man.x + calc.getAngleX(70, man.rotation + calc.degree2Radian(40));
         var Y = man.y + calc.getAngleY(70, man.rotation + calc.degree2Radian(40));
-        return Fire(X, Y, man.rotation);
+        return Fire(app, X, Y, man.rotation);
     }
 
     man.objTick = function (delta) {
@@ -42,7 +42,7 @@ function Man(x, y, rotation) {
         man.x += man.vx * delta;
         man.y += man.vy * delta;
     }
-
+    app.stage.addChild(man);
     return man;
 
 }
