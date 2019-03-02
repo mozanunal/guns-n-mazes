@@ -32,12 +32,10 @@ function onAssetsLoaded() {
 
     // player Man
     var playerMan = PlayerMan(app, app.screen.width / 2, app.screen.height / 2, 0);
-    app.stage.addChild(playerMan);
     console.log(blocks[0]);
 
     drawMap(app, blockTexts);
     var man1 = Man(app, 200, 200, 0);
-    app.stage.addChild(man1);
 
     f = man1.fire();
 

@@ -25,6 +25,7 @@ function Man(app, x, y, rotation) {
     man.vy = 0;
     man.anchor.set(0.5);
     man.animationSpeed = 0.15;
+    man.lifetime = 0;
     man.play("play");
 
     man.fire = function ( ) {
@@ -41,6 +42,10 @@ function Man(app, x, y, rotation) {
         }
         man.x += man.vx * delta;
         man.y += man.vy * delta;
+        man.lifetime += delta;
+        if (man.lifetime > 60){
+            app.stage.removeChildAt(app.stage.getChildIndex(man));
+        }
     }
     app.stage.addChild(man);
     return man;
