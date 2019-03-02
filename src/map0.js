@@ -1,4 +1,4 @@
-    function drawMap1(blockTexts,app) {
+    function drawMap1(app, blockTexts) {
     
     blockSprites = [];
 
