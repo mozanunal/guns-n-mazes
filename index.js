@@ -6,6 +6,7 @@ const keyboard = require('./misc/keyboard');
 const calc = require('./misc/calculation');
 // sprites
 const Fire = require('./src/fire');
+const Man = require('./src/man');
 
 var app = new PIXI.Application(800, 600, { backgroundColor: 0x004400 });
 document.body.appendChild(app.view);
@@ -14,63 +15,46 @@ PIXI.loader
     .add('assets/BlueMan/BlueMan.json')
     .load(onAssetsLoaded);
 
+GS_LOAD = 0;
+GS_ACTIVE = 1;
+
 
 function onAssetsLoaded() {
     // Settings
     PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
     // GLOBAL
-    var GLOBAL_SPRITES = []
+    var GLOBAL_SPRITES = [];
+    var GAME_STATE = GS_LOAD;
 
     // player Man
-    var walkFrames = [];
-    var stopFrame;
-    for (var i = 1; i < 4; i++) {
-        var val = i;
-
-        // magically works since the spritesheet was loaded with the pixi loader
-        walkFrames.push(PIXI.Texture.fromFrame('W' + val + '.png'));
-    }
-    idleFrame = PIXI.Texture.fromFrame('W2.png');
-    let walk = walkFrames;
-    let stop = [walkFrames[1]];
-    //let mc = new AnimatedSprite(walk,stop);
-
-    //playerMan = new PIXI.extras.AnimatedSprite(walkFrames);
-    let playerMan = new PIXI.extras.AnimatedSprite(walk, stop);
-    //playerMan = new AnimatedSprite(walk,stop);
-    playerMan.play(0);
-    playerMan.x = app.screen.width / 2;
-    playerMan.y = app.screen.height / 2;
-    playerMan.vx = 0;
-    playerMan.vy = 0;
-    playerMan.anchor.set(0.5);
-    playerMan.animationSpeed = 0.15;
-    playerMan.play("play");
-
+    var playerMan = Man(app.screen.width / 2, app.screen.height / 2, 0)
     app.stage.addChild(playerMan);
 
-    ;
-
+    GAME_STATE = GS_ACTIVE;
     // Animate the rotation
     app.ticker.add(function (delta) {
-        if (playerMan.vx == 0 && playerMan.vy == 0) {
-            // playerMan.stop();
-            playerMan.gotoAndStop(1);
+        if (GAME_STATE == GS_ACTIVE) {
+            if (playerMan.vx == 0 && playerMan.vy == 0) {
+                // playerMan.stop();
+                playerMan.gotoAndStop(1);
 
-        } else {
-            // playerMan.play();
-            playerMan.play();
-            playerMan.go
+            } else {
+                // playerMan.play();
+                playerMan.play();
+                playerMan.go
 
+            }
+
+            playerMan.x += playerMan.vx * delta;
+            playerMan.y += playerMan.vy * delta;
+
+            playerMan.rotation = calc.getAngleTo(Mouse.getPosX(), Mouse.getPosY(), playerMan.x, playerMan.y);
+
+            GLOBAL_SPRITES.forEach(function (sprite) {
+                sprite.objTick(delta);
+
+            });
         }
-        playerMan.x += playerMan.vx * delta;
-        playerMan.y += playerMan.vy * delta;
-
-        playerMan.rotation = calc.getAngleTo(Mouse.getPosX(), Mouse.getPosY(), playerMan.x, playerMan.y);
-
-        GLOBAL_SPRITES.forEach(function (sprite) {
-            sprite.objTick(delta);
-        });
     });
 
     Mouse.events.on('released', null, (buttonCode, event, mouseX, mouseY, mouseOriginX, mouseOriginY, mouseMoveX, mouseMoveY) => {

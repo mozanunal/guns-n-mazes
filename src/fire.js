@@ -21,6 +21,7 @@ function Fire ( x, y, rotation ) {
     sprite.objTick = function (delta) {
         sprite.x += sprite.vx * delta;
         sprite.y += sprite.vy * delta;
+        
     }
 
     return sprite;
