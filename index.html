@@ -9,39 +9,34 @@
 
 <body>
     <script type="text/javascript">
-        //Aliases
-        let Application = PIXI.Application,
-            loader = PIXI.loader,
-            resources = PIXI.loader.resources,
-            Sprite = PIXI.Sprite;
-
-        //Create a Pixi Application
-        let app = new Application({
-            width: 256,
-            height: 256,
-            antialias: true,
-            transparent: false,
-            resolution: 1
-        }
-        );
-
-        //Add the canvas that Pixi automatically created for you to the HTML document
+        var app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb });
         document.body.appendChild(app.view);
 
-        //load an image and run the `setup` function when it's done
-        loader
-            .add("assets/cat/cat.png")
-            .load(setup);
+        // create a new Sprite from an image path
+        var bunny = PIXI.Sprite.fromImage('assets/cat/cat.png')
+        
 
-        //This `setup` function will run when the image has loaded
-        function setup() {
+        // center the sprite's anchor point
+        bunny.anchor.set(0.5);
 
-            //Create the cat sprite
-            let cat = new Sprite(resources["assets/cat/cat.png"].texture);
+        // move the sprite to the center of the screen
+        bunny.x = app.screen.width / 2;
+        bunny.y = app.screen.height / 2;
+        
+        app.stage.addChild(bunny);
+        
+                
 
-            //Add the cat to the stage
-            app.stage.addChild(cat);
-        }
+        // Listen for animate update
+        app.ticker.add(function (delta) {
+            // just for fun, let's rotate mr rabbit a little
+            // delta is 1 if running at 100% performance
+            // creates frame-independent transformation
+            bunny.rotation += 0.1 * delta;
+            bunny.x += bunny.ali;
+            
+        });
+
 
     </script>
 </body>
