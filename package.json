@@ -19,6 +19,6 @@
   },
   "homepage": "https://github.com/mozanunal/guns-n-mazes#readme",
   "dependencies": {
-    "pixi.js": "^5.0.0-rc.2"
+    "pixi.js": "^4.5.5"
   }
 }
