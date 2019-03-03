@@ -74,6 +74,14 @@ function man(app, x, y, rotation) {
         man.vx = 0;
     };
 
+    Mouse.events.on('released', null, (buttonCode, event, mouseX, mouseY, mouseOriginX, mouseOriginY, mouseMoveX, mouseMoveY) => {
+        //console.log(buttonCode, mouseOriginX, mouseOriginY, mouseX, mouseY, mouseMoveX, mouseMoveY);
+       // console.log( playerMan.position.x, playerMan.position.y );
+        man.fire();
+       // console.log(app.stage.children);
+
+    });
+
     app.stage.addChild(man);
     return man;
 

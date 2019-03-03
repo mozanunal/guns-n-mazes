@@ -57,13 +57,7 @@ function onAssetsLoaded() {
         app.stage.pivot.copy(playerMan.position);
     });
 
-    Mouse.events.on('released', null, (buttonCode, event, mouseX, mouseY, mouseOriginX, mouseOriginY, mouseMoveX, mouseMoveY) => {
-        console.log(buttonCode, mouseOriginX, mouseOriginY, mouseX, mouseY, mouseMoveX, mouseMoveY);
-        console.log( playerMan.position.x, playerMan.position.y );
-        playerMan.fire();
-        console.log(app.stage.children);
-
-    });
+    
 
 
 }
