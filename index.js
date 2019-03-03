@@ -54,6 +54,7 @@ function onAssetsLoaded() {
                 
             });
         }
+        //playerMan.objCollider();
         app.stage.pivot.copy(playerMan.position);
     });
 

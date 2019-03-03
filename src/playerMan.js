@@ -33,6 +33,7 @@ function man(app, x, y, rotation) {
 
     man.objTick = function (delta) {
         man.rotation = calc.getAngleTo(app.screen.width / 2, app.screen.height / 2, Mouse.getPosX(), Mouse.getPosY() );
+        man.objCollider();
         if (man.vx == 0 && man.vy == 0) {
             man.gotoAndStop(1);
         } else {
@@ -41,12 +42,52 @@ function man(app, x, y, rotation) {
         man.x += man.vx * delta;
         man.y += man.vy * delta;
     }
+    man.colCounter = 0;
+    man.objCollider = function() {
+        //console.log(app.stage);
+        man.colCounter++;
+        if(man.colCounter>0) {
+            var t1 = performance.now; 
+            app.stage.children.forEach(element => {
+                if(element!=man) {
+                    var isCollide = CollisionCalculator(man,element);
+                    if(isCollide) {
+                        //console.log("You have interferance with", element);
+
+                        var colPoint = OnCollisionEnter(man,element);
+                        console.log(colPoint);
+                        switch (colPoint) {
+                            case 8:
+                                if(man.vy<0) {man.vy=0;}
+                                break;
+                            case 2:
+                                if(man.vy>0) {man.vy=0;}
+                                break;
+                            case 4:
+                                if(man.vx<0) {man.vx=0;}
+                                break;
+                            case 6:
+                                if(man.vx>0) {man.vx=0;}
+                                break;
+                        
+                            default:
+                                break;
+                        }
+                    }
+                }
+            });
+            var t2 = performance.now; 
+            console.log("Past time",(t2-t1));
+            man.colCounter=0;
+        }   
+        
+    }
 
     // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
-    let keyObjectUp = keyboard("ArrowUp");
-    let keyObjectDown = keyboard("ArrowDown");
-    let keyObjectLeft = keyboard("ArrowLeft");
-    let keyObjectRight = keyboard("ArrowRight");
+    let keyObjectUp = keyboard("w");
+    let keyObjectDown = keyboard("s");
+    let keyObjectLeft = keyboard("a");
+    let keyObjectRight = keyboard("d");
 
     keyObjectUp.press = () => {
         man.vy = -MOVEMENT_VEL;
@@ -78,13 +119,52 @@ function man(app, x, y, rotation) {
         //console.log(buttonCode, mouseOriginX, mouseOriginY, mouseX, mouseY, mouseMoveX, mouseMoveY);
        // console.log( playerMan.position.x, playerMan.position.y );
         man.fire();
+        //console.log(man.width,man.height);
        // console.log(app.stage.children);
 
     });
 
+    
+
     app.stage.addChild(man);
     return man;
 
+}
+
+function CollisionCalculator(o1,o2) {
+    //console.log(o1,o2);
+    var dx = o2.x - o1.x;
+    var dy = o2.y - o1.y;
+    if(Math.abs(dx)>o1.width/2+o2.width/2){
+        return false;
+    }
+    if(Math.abs(dy)>o1.height/2+o2.height/2)
+    {
+        return false;
+    }
+    return true;
+}
+function OnCollisionEnter(o1,o2) {
+    var dx = o2.x - o1.x;
+    var dy = o2.y - o1.y;
+    if(Math.abs(o1.width/2+o2.width/2-Math.abs(dx))>Math.abs(o1.height/2+o2.height/2-Math.abs(dy))) {
+        if(dy<0) {
+        console.log("Top Interferance");
+            return 8;
+        } else {
+        console.log("Bottom Interferance");
+            return 2;
+        }
+    } else {
+        if(dx>0) {
+            console.log("Right Interferance");
+            return 6;
+            } else {
+            console.log("Left Interferance");
+            return 4;
+    
+            }
+    }
 }
 
 

@@ -10,7 +10,7 @@ function keyboard(value) {
     //The `downHandler`
     key.downHandler = event => {
         if (event.key === key.value) {
-            console.log("Press: " + event.key);
+            //console.log("Press: " + event.key);
             key.press();
             key.isDown = true;
             key.isUp = false;
@@ -21,7 +21,7 @@ function keyboard(value) {
     //The `upHandler`
     key.upHandler = event => {
         if (event.key === key.value) {
-            console.log("Release: ", event.key);
+            //console.log("Release: ", event.key);
             key.release();
             key.isDown = false;
             key.isUp = true;
