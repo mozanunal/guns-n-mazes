@@ -1,3 +1,4 @@
+'use strict';
 //Collision Calculate Box to Box
 function CalculateCollision(o1,o2) {
     if(o1.isCircular&&o2.isCircular) {
@@ -157,35 +158,73 @@ function CollisionCalculatorC2B(o1,o2) {
         return false;
       }
     }
-function OnCollisionEnter(o1,o2) {
+function BoxCollisionRegion(o1,o2) {
     var dx = o2.x - o1.x;
     var dy = o2.y - o1.y;
     if(Math.abs(o1.width/2+o2.width/2-Math.abs(dx))>Math.abs(o1.height/2+o2.height/2-Math.abs(dy))) {
         if(dy<0) {
         console.log("Top Interferance");
-            return 8;
+            return "topMiddle";
         } else {
-        console.log("Bottom Interferance");
+        console.log("bottomMiddle");
             return 2;
         }
     } else {
         if(dx>0) {
-            console.log("Right Interferance");
+            console.log("rightMiddle");
             return 6;
             } else {
-            console.log("Left Interferance");
+            console.log("leftMiddle");
             return 4;
     
             }
     }
+}
+function PlayerCollisionEffect(man,region) {
+    switch (region) {
+        case "topMiddle":
+          if(man.vy>0) {man.vy=0;}
+          break;
+
+        case "leftMiddle":
+          if(man.vx>0) {man.vx=0;}
+          break;
+
+        case "bottomMiddle":
+          if(man.vy<0) {man.vy=0;}
+          break;
+
+        case "rightMiddle":
+          if(man.vx<0) {man.vx=0;}
+          break;
+        case "topLeft":
+          if(man.vy>0) {man.vy=0;}
+          if(man.vx>0) {man.vx=0;}
+          break;
+
+        case "topRight":
+        if(man.vy>0) {man.vy=0;}
+        if(man.vx<0) {man.vx=0;}
+          break;
+
+        case "bottomLeft":
+         if(man.vx>0) {man.vx=0;}
+          if(man.vy<0) {man.vy=0;}
+          break;
+
+        case "bottomRight":
+        if(man.vx<0) {man.vx=0;}
+        if(man.vy<0) {man.vy=0;}
+          break;
+      }
 }
 var CollisionModule = {
     CalculateCollision : CalculateCollision,
     CollisionCalculatorB2B : CollisionCalculatorB2B,
     CollisionCalculatorC2B: CollisionCalculatorC2B,
     CollisionCalculatorC2C: CollisionCalculatorC2C,
-    CollisionCalculatorC2P: CollisionCalculatorC2P
-
-
+    CollisionCalculatorC2P: CollisionCalculatorC2P,
+    BoxCollisionRegion : BoxCollisionRegion,
+    PlayerCollisionEffect: PlayerCollisionEffect
 }
 module.exports = CollisionModule;

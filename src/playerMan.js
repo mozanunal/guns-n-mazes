@@ -58,42 +58,7 @@ function man(app, x, y, rotation) {
 
                     var colliding = collision.CalculateCollision(man,element);
                     if(colliding[0]==true) {
-                        switch (colliding[1]) {
-                            case "topMiddle":
-                              if(man.vy>0) {man.vy=0;}
-                              break;
-                    
-                            case "leftMiddle":
-                              if(man.vx>0) {man.vx=0;}
-                              break;
-                    
-                            case "bottomMiddle":
-                              if(man.vy<0) {man.vy=0;}
-                              break;
-                    
-                            case "rightMiddle":
-                              if(man.vx<0) {man.vx=0;}
-                              break;
-                            case "topLeft":
-                              if(man.vy>0) {man.vy=0;}
-                              if(man.vx>0) {man.vx=0;}
-                              break;
-                    
-                            case "topRight":
-                            if(man.vy>0) {man.vy=0;}
-                            if(man.vx<0) {man.vx=0;}
-                              break;
-                    
-                            case "bottomLeft":
-                             if(man.vx>0) {man.vx=0;}
-                              if(man.vy<0) {man.vy=0;}
-                              break;
-                    
-                            case "bottomRight":
-                            if(man.vx<0) {man.vx=0;}
-                            if(man.vy<0) {man.vy=0;}
-                              break;
-                          }
+                        collision.PlayerCollisionEffect(man,colliding[1]);
                     }
                     
                 }
