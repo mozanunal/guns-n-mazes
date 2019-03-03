@@ -46,8 +46,8 @@ function man(app, x, y, rotation) {
     }
     man.colCounter = 0;
 
-    man.r = 50;
-    man.isCircular = true; 
+    man.r = 50; //Circular Collider Radius 
+    man.isCircular = true; //Is Collider circular
     man.objCollider = function() {
         //console.log(app.stage);
         man.colCounter++;

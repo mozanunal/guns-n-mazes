@@ -33,8 +33,8 @@ function Man(app, x, y, rotation) {
         return Fire(app, X, Y, man.rotation);
     }
 
-    man.r = 50;
-    man.isCircular = true; 
+    man.r = 50; //Circular Collider Radius 
+    man.isCircular = true; //Is Collider circular
 
     man.objTick = function (delta) {
         if (man.vx == 0 && man.vy == 0) {
