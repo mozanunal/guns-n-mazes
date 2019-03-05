@@ -26,6 +26,16 @@ function man(app, x, y, rotation) {
     man.animationSpeed = 0.15;
     man.play("play");
 
+    man.health = 100;
+    man.takeDamage = (amount) => {
+        man.health -= amount;
+        if(man.health<=0) {
+            man.health=0;
+            console.log("dead");
+        }
+    } 
+
+    man.tag = "man";
 
     man.fire = function () {
         var X = man.x + calc.getAngleX(70, man.rotation + calc.degree2Radian(40));
@@ -64,7 +74,7 @@ function man(app, x, y, rotation) {
                 }
             });
             var t2 = performance.now; 
-            console.log("Past time",(t2-t1));
+            //console.log("Past time",(t2-t1));
             man.colCounter=0;
         }   
         
@@ -107,7 +117,7 @@ function man(app, x, y, rotation) {
        // console.log( playerMan.position.x, playerMan.position.y );
         man.fire();
         //console.log(man.width,man.height);
-       // console.log(app.stage.children);
+        //console.log(app.stage.children);
 
     });
 

@@ -50,12 +50,15 @@ function onAssetsLoaded() {
     // Animate the rotation
     app.ticker.add(function (delta) {
         if (GAME_STATE == GS_ACTIVE) {
+            var t1 = performance.now; 
             app.stage.children.forEach(function (sprite) {
                 if (sprite.objTick != undefined){
                     sprite.objTick(delta);
                 }
                 
             });
+            var t2 = performance.now; 
+            //console.log("One tick", (t2-t1));
         }
         //playerMan.objCollider();
         app.stage.pivot.copy(playerMan.position);
