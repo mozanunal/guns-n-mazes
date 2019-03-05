@@ -36,6 +36,7 @@ function Man(app, x, y, rotation) {
         if(man.health<=0) {
             man.health=0;
             console.log("dead");
+            man.destroy();
         }
         console.log(man.health);
     } 
