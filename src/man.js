@@ -50,6 +50,26 @@ function Man(app, x, y, rotation) {
     man.r = 50; //Circular Collider Radius 
     man.isCircular = true; //Is Collider circular
 
+    man.ammo = 6;
+    man.fire = function () {
+        if(man.ammo>0) {
+            man.ammo--;
+            var X = man.x + calc.getAngleX(70, man.rotation + calc.degree2Radian(40));
+            var Y = man.y + calc.getAngleY(70, man.rotation + calc.degree2Radian(40));
+            return Fire(app, X, Y, man.rotation);
+        }
+    }
+    man.timeCounter2 = 0;
+    man.ammoFiller = (delta) => {
+        man.timeCounter2 += delta;
+        if(man.timeCounter2>30) {
+            if(man.ammo<6) {
+                man.timeCounter2 = 0;
+                man.ammo++;
+            }
+        }
+    }
+
     man.objTick = function (delta) {
         if (man.vx == 0 && man.vy == 0) {
             man.gotoAndStop(1);
