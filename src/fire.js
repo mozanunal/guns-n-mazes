@@ -32,9 +32,12 @@ function Fire (app, x, y, rotation ) {
         sprite.lifetime += delta;
         if(sprite.lifetime > MAX_LIFETIME)
         {
-            if(sprite!=null&&sprite!=undefined) { //Control is it null for avoid make it game crash
+            try {
                 sprite.destroy();
+            } catch(err) {
+
             }
+            
         }
     }
     sprite.colCounter = 0;
