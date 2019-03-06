@@ -10,7 +10,6 @@ function getAngleTo(mx, my, px, py) {
     var distX = my - py;
     var distY = mx - px;
     var angle = Math.atan2(distX, distY) - Math.PI / 2;
-    //var degrees = angle * 180/ Math.PI;
     return angle;
 }
 

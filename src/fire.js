@@ -5,6 +5,7 @@ const collision = require('./collision');
 
 
 const SPEED = 10;
+const MAX_LIFETIME = 60;
 
 function Fire (app, x, y, rotation ) {
     
@@ -18,7 +19,7 @@ function Fire (app, x, y, rotation ) {
     sprite.y = y;
     sprite.vx = calc.getAngleX(SPEED, rotation);
     sprite.vy = calc.getAngleY(SPEED, rotation);
-
+    sprite.lifetime = 0; 
     sprite.isCircular = true; // Has circular collission detection
     sprite.r = 5; //Collider radius is 5 
 
@@ -26,10 +27,13 @@ function Fire (app, x, y, rotation ) {
     sprite.objTick = function (delta) {
         sprite.x += sprite.vx * delta;
         sprite.y += sprite.vy * delta;
-
-        sprite.objCollider();
-
         
+        sprite.objCollider();
+        sprite.lifetime += delta;
+        if(sprite.lifetime > MAX_LIFETIME)
+        {
+            sprite.destroy();
+        }
     }
     sprite.colCounter = 0;
     sprite.objCollider = function() {
