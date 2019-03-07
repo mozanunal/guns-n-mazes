@@ -71,6 +71,7 @@ function Man(app, x, y, rotation) {
     }
 
     man.objTick = function (delta) {
+        man.ammoFiller(delta);
         if (man.vx == 0 && man.vy == 0) {
             man.gotoAndStop(1);
         } else {
