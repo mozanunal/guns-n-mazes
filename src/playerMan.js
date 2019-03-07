@@ -5,37 +5,13 @@ const calc = require('../misc/calculation');
 const keyboard = require('../misc/keyboard');
 const Mouse = require('pixi.js-mouse');
 const collision = require('./collision');
+const ManBase = require('./man');
 const MOVEMENT_VEL = 4;
 
 function man(app, x, y, rotation) {
-    var walkFrames = [];
-    var stopFrame;
-    for (var i = 1; i < 4; i++) {
-        walkFrames.push(PIXI.Texture.fromFrame('W' + i + '.png'));
-    }
-    let walk = walkFrames;
-    let stop = [walkFrames[1]];
-    let man = new PIXI.extras.AnimatedSprite(walk, stop);
-
-    man.play();
-    man.x = x;
-    man.y = y;
-    man.vx = 0;
-    man.vy = 0;
-    man.anchor.set(0.5);
-    man.animationSpeed = 0.15;
-    man.play("play");
-
-    man.health = 100;
-    man.takeDamage = (amount) => {
-        man.health -= amount;
-        if(man.health<=0) {
-            man.health=0;
-            console.log("dead");
-        }
-    } 
-
-    man.tag = "man";
+    
+    //let man = new PIXI.extras.AnimatedSprite(walk, stop);
+    let man = ManBase(app, x,y, rotation);
 
     man.ammo = 6;
     man.fire = function () {
@@ -71,8 +47,6 @@ function man(app, x, y, rotation) {
     }
     man.colCounter = 0;
 
-    man.r = 50; //Circular Collider Radius 
-    man.isCircular = true; //Is Collider circular
     man.objCollider = function() {
         //console.log(app.stage);
         man.colCounter++;
