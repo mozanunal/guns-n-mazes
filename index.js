@@ -47,6 +47,10 @@ function onAssetsLoaded() {
     app.stage.scale.set(0.75,0.75);
     app.stage.pivot.copy(playerMan.position);
     GAME_STATE = GS_ACTIVE;
+
+    var sinner = 0;
+    app.stage.isShaking = false;
+
     // Animate the rotation
     app.ticker.add(function (delta) {
         if (GAME_STATE == GS_ACTIVE) {
@@ -61,6 +65,16 @@ function onAssetsLoaded() {
             //console.log("One tick", (t2-t1));
         }
         //playerMan.objCollider();
+        //For shake the screen
+        if(app.stage.isShaking) {
+            sinner+=1;
+            app.stage.position.set(app.screen.width / 2+2*Math.sin(sinner), app.screen.height / 2 +2*Math.sin(sinner));
+            if(sinner>100) {
+                app.stage.position.set(app.screen.width / 2, app.screen.height / 2);
+                sinner = 0;
+                app.stage.isShaking = false;
+            }
+        }
         app.stage.pivot.copy(playerMan.position);
     });
 

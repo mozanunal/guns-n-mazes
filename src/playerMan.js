@@ -107,6 +107,7 @@ function man(app, x, y, rotation) {
         man.fire();
         //console.log(man.width,man.height);
         //console.log(app.stage.children);
+        //app.stage.isShaking = true;
 
     });
 
