@@ -6,6 +6,8 @@ const calc = require('./misc/calculation');
 // sprites
 const Man = require('./src/man');
 const PlayerMan = require('./src/playerMan');
+const sPlayerMan = require('./src/skinnedPlayerMan');
+
 const drawMap = require('./src/map0');
 
 var app = new PIXI.Application(1500,700, { backgroundColor: 0x004400 });
@@ -14,6 +16,7 @@ document.body.appendChild(app.view);
 const blocks = ['assets/BlueMan/Dg1.png', 'assets/BlueMan/Dg2.png', 'assets/BlueMan/Dg3.png', 'assets/BlueMan/Dg4.png', 'assets/BlueMan/Dg5.png'];
 PIXI.loader
     .add('assets/BlueMan/BlueMan.json')
+    .add('assets/BlueMan/SkinnedMan.json')
     .add(blocks)
     .load(onAssetsLoaded);
 
@@ -32,7 +35,9 @@ function onAssetsLoaded() {
 
     // player Man
    // var playerMan = PlayerMan(app, app.screen.width / 2, app.screen.height / 2, 0);
-    var playerMan = PlayerMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0);
+    //var playerMan = PlayerMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0);
+    var playerMan = sPlayerMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0);
+
 
     app.stage.addChild(playerMan);
     console.log(blocks[0]);

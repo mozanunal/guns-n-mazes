@@ -1,0 +1,47 @@
+{"frames": {
+
+"Ayak1.png":
+{
+	"frame": {"x":0,"y":0,"w":77,"h":93},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":77,"h":93},
+	"sourceSize": {"w":77,"h":93}
+},
+"Ayak2.png":
+{
+	"frame": {"x":77,"y":0,"w":75,"h":71},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":71},
+	"sourceSize": {"w":75,"h":71}
+},
+"Ayak3.png":
+{
+	"frame": {"x":152,"y":0,"w":77,"h":91},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":77,"h":91},
+	"sourceSize": {"w":77,"h":91}
+},
+"BMAvatar.png":
+{
+	"frame": {"x":229,"y":0,"w":103,"h":101},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":103,"h":101},
+	"sourceSize": {"w":103,"h":101}
+}},
+"animations": {
+	"Ayak": ["Ayak1.png","Ayak2.png","Ayak3.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "SkinnedMan.png",
+	"format": "RGBA8888",
+	"size": {"w":332,"h":101},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:db6673e4269842723785090e28ac543e:652b21f00a28ce711a44fb6c7c8d0428:f52165849fa0ba62be3a14b14655ec9c$"
+}
+}
