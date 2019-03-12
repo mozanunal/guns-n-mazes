@@ -21,7 +21,7 @@ function Man(app, x, y, rotation) {
 
     let man = new PIXI.Container;
     //man.avatar = new PIXI.Sprite.fromFrame('BMAvatar.png');
-    man.avatar = new PIXI.Sprite.fromImage(skins[skinId]);
+    man.avatar = new PIXI.Sprite.fromImage(skins[skinId]); //Create character with given sprite id
     
     man.gun = new PIXI.Sprite.fromImage("assets/BlueMan/Gun1.png")
     man.gun.anchor.set(0.5);
