@@ -10,13 +10,25 @@ const SPEED = 10;
 function Man(app, x, y, rotation) {
     var walkFrames = [];
     var stopFrame;
+
+    const skins = ["assets/BlueMan/Skin01.png","assets/BlueMan/Skin02.png","assets/BlueMan/Skin03.png"];
+    var skinId = 2;
+
     for (var i = 1; i < 4; i++) {
         walkFrames.push(PIXI.Texture.fromFrame('Ayak' + i + '.png'));
     }
     let walk = walkFrames;
 
     let man = new PIXI.Container;
-    man.avatar = new PIXI.Sprite.fromFrame('BMAvatar.png');
+    //man.avatar = new PIXI.Sprite.fromFrame('BMAvatar.png');
+    man.avatar = new PIXI.Sprite.fromImage(skins[skinId]);
+    
+    man.gun = new PIXI.Sprite.fromImage("assets/BlueMan/Gun1.png")
+    man.gun.anchor.set(0.5);
+    man.gun.zOrder=2;
+    
+    man.addChild(man.gun);
+    man.gun.position.set(50,-10);
 
     man.feet = new PIXI.extras.AnimatedSprite(walk);
 
