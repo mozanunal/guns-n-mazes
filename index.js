@@ -8,7 +8,7 @@ const Man = require('./src/man');
 const PlayerMan = require('./src/playerMan');
 const drawMap = require('./src/map0');
 
-var app = new PIXI.Application(1500,700, { backgroundColor: 0x004400 });
+var app = new PIXI.Application(1500, 700, { backgroundColor: 0x004400 });
 document.body.appendChild(app.view);
 
 const blocks = ['assets/BlueMan/Dg1.png', 'assets/BlueMan/Dg2.png', 'assets/BlueMan/Dg3.png', 'assets/BlueMan/Dg4.png', 'assets/BlueMan/Dg5.png'];
@@ -31,8 +31,8 @@ function onAssetsLoaded() {
     var GAME_STATE = GS_LOAD;
 
     // player Man
-   // var playerMan = PlayerMan(app, app.screen.width / 2, app.screen.height / 2, 0);
-    var playerMan = PlayerMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0);
+    // var playerMan = PlayerMan(app, app.screen.width / 2, app.screen.height / 2, 0);
+    var playerMan = PlayerMan(app, app.screen.width / 2, (app.screen.height / 2) - 50, 0);
 
     app.stage.addChild(playerMan);
     console.log(blocks[0]);
@@ -44,27 +44,28 @@ function onAssetsLoaded() {
     f = man1.fire();
 
     app.stage.position.set(app.screen.width / 2, app.screen.height / 2);
-    app.stage.scale.set(0.75,0.75);
+    app.stage.scale.set(0.75, 0.75);
     app.stage.pivot.copy(playerMan.position);
     GAME_STATE = GS_ACTIVE;
+
     // Animate the rotation
     app.ticker.add(function (delta) {
         if (GAME_STATE == GS_ACTIVE) {
-            var t1 = performance.now; 
+            var t1 = performance.now;
             app.stage.children.forEach(function (sprite) {
-                if (sprite.objTick != undefined){
+                if (sprite.objTick != undefined) {
                     sprite.objTick(delta);
                 }
-                
+
             });
-            var t2 = performance.now; 
+            var t2 = performance.now;
             //console.log("One tick", (t2-t1));
         }
         //playerMan.objCollider();
         app.stage.pivot.copy(playerMan.position);
     });
 
-    
+
 
 
 }
