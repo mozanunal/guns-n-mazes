@@ -32,7 +32,12 @@ function Fire (app, x, y, rotation ) {
         sprite.lifetime += delta;
         if(sprite.lifetime > MAX_LIFETIME)
         {
-            sprite.destroy();
+            try {
+                sprite.destroy();
+            } catch(err) {
+
+            }
+            
         }
     }
     sprite.colCounter = 0;

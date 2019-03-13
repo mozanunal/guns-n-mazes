@@ -3,46 +3,61 @@
 
 const Fire = require('./fire');
 const calc = require('../misc/calculation');
-const HealthBar = require('./healthBar');
+
 
 const SPEED = 10;
 
 function Man(app, x, y, rotation) {
     var walkFrames = [];
     var stopFrame;
+
+    const skins = ["assets/BlueMan/Skin01.png","assets/BlueMan/Skin02.png","assets/BlueMan/Skin03.png"];
+    var skinId = 2;
+
     for (var i = 1; i < 4; i++) {
-        walkFrames.push(PIXI.Texture.fromFrame('W' + i + '.png'));
+        walkFrames.push(PIXI.Texture.fromFrame('Ayak' + i + '.png'));
     }
     let walk = walkFrames;
-    let stop = [walkFrames[1]];
-    let man = new PIXI.extras.AnimatedSprite(walk, stop);
+
+    let man = new PIXI.Container;
+    //man.avatar = new PIXI.Sprite.fromFrame('BMAvatar.png');
+    man.avatar = new PIXI.Sprite.fromImage(skins[skinId]); //Create character with given sprite id
+    
+    man.gun = new PIXI.Sprite.fromImage("assets/BlueMan/Gun1.png")
+    man.gun.anchor.set(0.5);
+    man.gun.zOrder=2;
+    
+    man.addChild(man.gun);
+    man.gun.position.set(50,-10);
+
+    man.feet = new PIXI.extras.AnimatedSprite(walk);
+
+    
+    man.feet.anchor.set(0.5);
+    man.addChild(man.feet);
+    man.addChild(man.avatar);
 
 
-
-    man.play();
     man.x = x;
     man.y = y;
     man.vx = 0;
     man.vy = 0;
-    man.anchor.set(0.5);
-    man.animationSpeed = 0.15;
-    man.play("play");
+
+    man.avatar.anchor.set(0.5);
+    man.avatar.position.set(0,0);
+
+    man.feet.animationSpeed = 0.15;
+    man.feet.play("play");
+
+
+    man.feet.position.set(0,-25);
+    man.feet.zOrder = 1;
 
     man.tag = "man";
 
     man.health = 100;
-    var healthBar = HealthBar();
-    man.healthBar = healthBar;
-    man.addChild(man.healthBar);
-    // const HB_LEN = 128;
-    // const HB_THICKNESS = 12;
-    // //Create the health bar
-    // healthBar = new PIXI.Container();
-    // healthBar.position.set(-HB_LEN/2, 60);
-    // man.addChild(healthBar);
     man.takeDamage = (amount) => {
         man.health -= amount;
-        man.healthBar.setHealth(man.health);
         if(man.health<=0) {
             man.health=0;
             console.log("dead");
@@ -83,9 +98,9 @@ function Man(app, x, y, rotation) {
     man.objTick = function (delta) {
         man.ammoFiller(delta);
         if (man.vx == 0 && man.vy == 0) {
-            man.gotoAndStop(1);
+            man.feet.gotoAndStop(1);
         } else {
-            man.play();
+            man.feet.play();
         }
         man.x += man.vx * delta;
         man.y += man.vy * delta;

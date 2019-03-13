@@ -5,7 +5,7 @@ const calc = require('../misc/calculation');
 const keyboard = require('../misc/keyboard');
 const Mouse = require('pixi.js-mouse');
 const collision = require('./collision');
-const ManBase = require('./man');
+const ManBase = require('./skinnedMan');
 const MOVEMENT_VEL = 4;
 
 function man(app, x, y, rotation) {
@@ -38,9 +38,9 @@ function man(app, x, y, rotation) {
         man.ammoFiller(delta);
         man.objCollider();
         if (man.vx == 0 && man.vy == 0) {
-            man.gotoAndStop(1);
+            man.feet.gotoAndStop(1);
         } else {
-            man.play();
+            man.feet.play();
         }
         man.x += man.vx * delta;
         man.y += man.vy * delta;
