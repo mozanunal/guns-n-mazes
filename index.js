@@ -48,29 +48,6 @@ function onAssetsLoaded() {
     app.stage.pivot.copy(playerMan.position);
     GAME_STATE = GS_ACTIVE;
 
-    const HB_LEN = 128;
-    const HB_THICKNESS = 12;
-    //Create the health bar
-    healthBar = new PIXI.Container();
-    healthBar.position.set(-HB_LEN/2, 60)
-    playerMan.addChild(healthBar);
-
-    //Create the black background rectangle
-    let innerBar = new PIXI.Graphics();
-    innerBar.beginFill(0x000000);
-    innerBar.drawRect(0, 0, HB_LEN, HB_THICKNESS);
-    innerBar.endFill();
-    healthBar.addChild(innerBar);
-
-    //Create the front red rectangle
-    let outerBar = new PIXI.Graphics();
-    outerBar.beginFill(0xFF3300);
-    outerBar.drawRect(0, 0, HB_LEN, HB_THICKNESS);
-    outerBar.endFill();
-    healthBar.addChild(outerBar);
-
-    healthBar.outer = outerBar;
-
     // Animate the rotation
     app.ticker.add(function (delta) {
         if (GAME_STATE == GS_ACTIVE) {
