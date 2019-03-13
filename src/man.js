@@ -3,7 +3,7 @@
 
 const Fire = require('./fire');
 const calc = require('../misc/calculation');
-
+const HealthBar = require('./healthBar');
 
 const SPEED = 10;
 
@@ -31,8 +31,18 @@ function Man(app, x, y, rotation) {
     man.tag = "man";
 
     man.health = 100;
+    var healthBar = HealthBar();
+    man.healthBar = healthBar;
+    man.addChild(man.healthBar);
+    // const HB_LEN = 128;
+    // const HB_THICKNESS = 12;
+    // //Create the health bar
+    // healthBar = new PIXI.Container();
+    // healthBar.position.set(-HB_LEN/2, 60);
+    // man.addChild(healthBar);
     man.takeDamage = (amount) => {
         man.health -= amount;
+        man.healthBar.setHealth(man.health);
         if(man.health<=0) {
             man.health=0;
             console.log("dead");
