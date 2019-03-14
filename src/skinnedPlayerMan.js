@@ -34,6 +34,10 @@ function man(app, x, y, rotation) {
         }
     }
 
+    let manPacker = (ma)=> {
+        return{"id":ma.id,"posX":ma.x,"posY":ma.y,"vx":ma.vx,"vy":ma.vy}
+    }
+
     let conn = connection();
 
 
@@ -48,8 +52,13 @@ function man(app, x, y, rotation) {
         }
         man.x += man.vx * delta;
         man.y += man.vy * delta;
-        if(conn!=undefined) {
-            conn.send(man.vx);
+
+        try{
+        //conn.send(man.vx);
+        conn.sendObject(manPacker(man));
+        }
+        catch(err) {
+
         }
     }
     man.colCounter = 0;
