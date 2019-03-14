@@ -6,6 +6,7 @@ const keyboard = require('../misc/keyboard');
 const Mouse = require('pixi.js-mouse');
 const collision = require('./collision');
 const ManBase = require('./skinnedMan');
+const connection = require('./connection');
 const MOVEMENT_VEL = 4;
 
 function man(app, x, y, rotation) {
@@ -33,6 +34,9 @@ function man(app, x, y, rotation) {
         }
     }
 
+    let conn = connection();
+
+
     man.objTick = function (delta) {
         man.rotation = calc.getAngleTo(app.screen.width / 2, app.screen.height / 2, Mouse.getPosX(), Mouse.getPosY() );
         man.ammoFiller(delta);
@@ -44,6 +48,9 @@ function man(app, x, y, rotation) {
         }
         man.x += man.vx * delta;
         man.y += man.vy * delta;
+        if(conn!=undefined) {
+            conn.send(man.vx);
+        }
     }
     man.colCounter = 0;
 

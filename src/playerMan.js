@@ -6,7 +6,10 @@ const keyboard = require('../misc/keyboard');
 const Mouse = require('pixi.js-mouse');
 const collision = require('./collision');
 const ManBase = require('./man');
+const conn = require('./connection');
+
 const MOVEMENT_VEL = 4;
+
 
 function man(app, x, y, rotation) {
     
@@ -33,6 +36,8 @@ function man(app, x, y, rotation) {
         }
     }
 
+    //let socket = conn();
+
     man.objTick = function (delta) {
         man.rotation = calc.getAngleTo(app.screen.width / 2, app.screen.height / 2, Mouse.getPosX(), Mouse.getPosY() );
         man.ammoFiller(delta);
@@ -44,6 +49,8 @@ function man(app, x, y, rotation) {
         }
         man.x += man.vx * delta;
         man.y += man.vy * delta;
+
+       // socket.sendObject(man);
     }
     man.colCounter = 0;
 

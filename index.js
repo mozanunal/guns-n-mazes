@@ -79,11 +79,9 @@ function onAssetsLoaded() {
                 app.stage.isShaking = false;
             }
         }
+        
         app.stage.pivot.copy(playerMan.position);
     });
-
-
-
 
 }
 
