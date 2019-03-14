@@ -34,12 +34,14 @@ function man(app, x, y, rotation) {
         }
     }
 
+    man.id=0; //Default id 0
     let manPacker = (ma)=> {
-        return{"id":ma.id,"posX":ma.x,"posY":ma.y,"vx":ma.vx,"vy":ma.vy}
+        return{"id":ma.id,"posX":ma.x,"posY":ma.y,"vx":ma.vx,"vy":ma.vy,"timeStamp":Math.floor(Date.now())};
+       //return{"id":ma.id,"posX":ma.x,"posY":ma.y,"vx":ma.vx,"vy":ma.vy,"timeStamp":Math.floor(Performance.now() / 1000)};
+
     }
 
     let conn = connection();
-
 
     man.objTick = function (delta) {
         man.rotation = calc.getAngleTo(app.screen.width / 2, app.screen.height / 2, Mouse.getPosX(), Mouse.getPosY() );
