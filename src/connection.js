@@ -14,8 +14,8 @@ let CreateWebSocket = ()=>{
         socket.send("Connected");
     }
 
-    socket.onmessage = ()=> {
-
+    socket.onmessage = (msg)=> {
+        //console.log("Message"+ msg.data );
     }
     socket.sendObject = (obj)=>{
         let msg = JSON.stringify(obj);
