@@ -1,6 +1,7 @@
 
 const PIXI = require('pixi.js');
 const Mouse = require('pixi.js-mouse');
+const connection = require('./connection');
 //misc
 const calc = require('./misc/calculation');
 // sprites
@@ -33,10 +34,12 @@ function onAssetsLoaded() {
     // GLOBAL
     var GAME_STATE = GS_LOAD;
 
+    let conn = connection();
+
 
    // var playerMan = PlayerMan(app, app.screen.width / 2, app.screen.height / 2, 0);
     //var playerMan = PlayerMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0);
-    var playerMan = sPlayerMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0);
+    var playerMan = sPlayerMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0, conn);
 
     app.stage.addChild(playerMan);
     console.log(blocks[0]);

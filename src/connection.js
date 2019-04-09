@@ -11,7 +11,8 @@ let CreateWebSocket = ()=>{
 
 
     socket.onopen = ()=> {
-        socket.send("Connected");
+        //socket.send("Connected");
+        console.log("Connected");
     }
 
     socket.onmessage = (msg)=> {
