@@ -17,6 +17,8 @@ const drawMap = require('./src/map0');
 var app = new PIXI.Application(1500, 700, { backgroundColor: 0x004400 });
 document.body.appendChild(app.view);
 
+//var MP = MPManager(app);
+
 const blocks = ['assets/BlueMan/Dg1.png', 'assets/BlueMan/Dg2.png', 'assets/BlueMan/Dg3.png', 'assets/BlueMan/Dg4.png', 'assets/BlueMan/Dg5.png'];
 PIXI.loader
     .add('assets/BlueMan/BlueMan.json')
@@ -51,15 +53,16 @@ function onAssetsLoaded() {
     }
 
     conn.onmessage = (msg)=>{
+        console.log("Hey msg came");
         MP.handleComingData(msg);
     };
 
 
    // var playerMan = PlayerMan(app, app.screen.width / 2, app.screen.height / 2, 0);
     //var playerMan = PlayerMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0);
-    var playerMan = sPlayerMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0, conn);
+    //var playerMan = sPlayerMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0, conn);
 
-    app.stage.addChild(playerMan);
+    //app.stage.addChild(playerMan);
     console.log(blocks[0]);
 
     drawMap(app, blockTexts);
@@ -70,7 +73,12 @@ function onAssetsLoaded() {
 
     app.stage.position.set(app.screen.width / 2, app.screen.height / 2);
     app.stage.scale.set(0.75, 0.75);
-    app.stage.pivot.copy(playerMan.position);
+
+    if(app.playerMan != undefined) {
+        app.stage.pivot.copy(app.playerMan.position);
+
+    }
+
     GAME_STATE = GS_ACTIVE;
 
 
@@ -101,7 +109,9 @@ function onAssetsLoaded() {
             }
         }
         
-        app.stage.pivot.copy(playerMan.position);
+        if(app.playerMan != undefined) {
+            app.stage.pivot.copy(app.playerMan.position);
+        }
     });
 
 }

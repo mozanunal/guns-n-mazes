@@ -3,16 +3,19 @@ const sPlayerMan = require('./skinnedPlayerMan');
 
 let CreateMPManager = (app) => {
 
+    var manager = {};
 
-    let manager;
-    manager.app = app;
+    //manager.app = app;
     //manager.stage = stage;
     manager.drawObject = (data)=> {
         if(data.IsOwner) {
-            let newPlayer = sPlayerMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0);
+            let yourPlayer = sPlayerMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0);
+            app.stage.addChild(yourPlayer);
+            app.playerMan = yourPlayer;
+
         } else {
             let newPlayer = sMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0);
-
+            app.stage.addChild(newPlayer);
         }
     }
     manager.destroyObject = (data) => {
@@ -22,9 +25,17 @@ let CreateMPManager = (app) => {
     manager.updateGame = (data)=> {
 
     }
+    manager.adana = 1;
 
+    //manager.handleComingData = (jsonData) => {
     manager.handleComingData = (jsonData) => {
+        jsonData = jsonData.data;
+
+        console.log(jsonData);
+        console.log("Before parse");
+
         let comingData = JSON.parse(jsonData);
+        /*
         if(comingData.type=="statepack") {
             let playersData = data.players;
             let firesData = data.fires;
@@ -33,21 +44,23 @@ let CreateMPManager = (app) => {
         } else if(comingData.type=="welcome") {
             
         }
-
+        */
+       console.log("Before switch");
         switch (comingData.Flag) {
             case 0:
-            drawObject(comingData)
+            manager.drawObject(comingData)
             break;
             case 1:
-            updateGame(comingData)
+            manager.updateGame(comingData)
             break;
             case 2:
-            destroyObject(comingData)
+            manager.destroyObject(comingData)
             break;
             default:
             break;
         }
     }
+    return manager;
 }
 
 module.exports = CreateMPManager;
