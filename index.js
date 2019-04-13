@@ -1,13 +1,16 @@
 
 const PIXI = require('pixi.js');
 const Mouse = require('pixi.js-mouse');
-const connection = require('./connection');
+const connection = require('./src/connection');
 //misc
 const calc = require('./misc/calculation');
 // sprites
 const Man = require('./src/man');
 const PlayerMan = require('./src/playerMan');
 const sPlayerMan = require('./src/skinnedPlayerMan');
+const sMan = require('./src/skinnedMan');
+
+const MPManager = require('./src/MPManager');
 
 const drawMap = require('./src/map0');
 
@@ -35,6 +38,21 @@ function onAssetsLoaded() {
     var GAME_STATE = GS_LOAD;
 
     let conn = connection();
+
+    let MP = MPManager(app);
+    
+    var drawComingP = (data) => {
+        let newPlayer = sPlayerMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0, conn);
+    }
+    var drawComing = (data) => {
+        let newPlayer = sMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0, conn);
+
+        //let newPlayer
+    }
+
+    conn.onmessage = (msg)=>{
+        MP.handleComingData(msg);
+    };
 
 
    // var playerMan = PlayerMan(app, app.screen.width / 2, app.screen.height / 2, 0);

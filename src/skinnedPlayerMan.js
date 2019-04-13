@@ -9,13 +9,13 @@ const ManBase = require('./skinnedMan');
 const connection = require('./connection');
 const MOVEMENT_VEL = 4;
 
-//function man(app, x, y, rotation) { Old style without connection
-function man(app, x, y, rotation,conn) {
+function man(app, x, y, rotation) { //Old style without connection
+//function man(app, x, y, rotation,conn) {
     
     //let man = new PIXI.extras.AnimatedSprite(walk, stop);
     let man = ManBase(app, x,y, rotation);
 
-    man.conn = conn; //Assign connection
+    //man.conn = conn; //Assign connection
 
     man.ammo = 6;
     man.fire = function () {
@@ -58,6 +58,7 @@ function man(app, x, y, rotation,conn) {
         man.x += man.vx * delta;
         man.y += man.vy * delta;
 
+        /*
         try{
         //conn.send(man.vx);
         man.conn.sendObject(manPacker(man));
@@ -65,6 +66,7 @@ function man(app, x, y, rotation,conn) {
         catch(err) {
 
         }
+        */
     }
     man.colCounter = 0;
 

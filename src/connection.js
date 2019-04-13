@@ -15,9 +15,11 @@ let CreateWebSocket = ()=>{
         console.log("Connected");
     }
 
+    /*
     socket.onmessage = (msg)=> {
         //console.log("Message"+ msg.data );
     }
+    */
     socket.sendObject = (obj)=>{
         let msg = JSON.stringify(obj);
         socket.send(msg);

@@ -1,11 +1,19 @@
+const sMan = require('./skinnedMan');
+const sPlayerMan = require('./skinnedPlayerMan');
 
-let CreateMPManager = (stage) => {
+let CreateMPManager = (app) => {
 
 
     let manager;
-    manager.stage = stage;
+    manager.app = app;
+    //manager.stage = stage;
     manager.drawObject = (data)=> {
-        
+        if(data.IsOwner) {
+            let newPlayer = sPlayerMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0);
+        } else {
+            let newPlayer = sMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0);
+
+        }
     }
     manager.destroyObject = (data) => {
         
@@ -26,7 +34,7 @@ let CreateMPManager = (stage) => {
             
         }
 
-        switch (comingData.flag) {
+        switch (comingData.Flag) {
             case 0:
             drawObject(comingData)
             break;
