@@ -7,24 +7,61 @@ let CreateMPManager = (app) => {
 
     //manager.app = app;
     //manager.stage = stage;
-    manager.drawObject = (data)=> {
-        if(data.IsOwner) {
-            let yourPlayer = sPlayerMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0);
-            app.stage.addChild(yourPlayer);
-            app.playerMan = yourPlayer;
-
-        } else {
-            let newPlayer = sMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0);
-            app.stage.addChild(newPlayer);
-        }
-    }
+    var players = {};
     manager.destroyObject = (data) => {
         
     }
-
     manager.updateGame = (data)=> {
+        var playerDatas = data.Players;
+        if(data.Players!=undefined&&data.Players!=null) {
+        playerDatas.forEach(function(playerData) {
+            players[playerData.Id].x = playerData.PlayerData.PosX;
+            players[playerData.Id].y = playerData.PlayerData.PosY;
+            players[playerData.Id].vx = playerData.PlayerData.Vx;
+            players[playerData.Id].vy = playerData.PlayerData.Vy;
+            players[playerData.Id].rotation = playerData.PlayerData.Rot;
+          });
+        }
+    }
+    
+    manager.createFire = (data)=>{
+    }
+    manager.createPlayer = (data)=> {
+        if(data.IsOwner) {
+            let yourPlayer = sPlayerMan(app, data.PosX, data.PosY, 0);
+            app.stage.addChild(yourPlayer);
+            app.playerMan = yourPlayer;
+            players[data.Id] = app.playerMan;
+        } else {
+            let newPlayer = sMan(app, data.PosX, data.PosY, 0);
+            app.stage.addChild(newPlayer);
+            players[data.Id]=newPlayer;
+        } 
+    }
+    manager.createOwnPlayer = (data) =>{
+            let yourPlayer = sPlayerMan(app, data.PosX, data.PosY, 0);
+            app.stage.addChild(yourPlayer);
+            app.playerMan = yourPlayer;
+            players[data.Id] = app.playerMan;
 
     }
+    manager.createOtherPlayers = (data)=>{
+            let newPlayer = sMan(app, data.PosX, data.PosY, 0);
+            app.stage.addChild(newPlayer);
+            players[data.Id]=newPlayer;
+    }
+    manager.createGame = (data)=>{
+        manager.createOwnPlayer(data.Player);
+        //console.log(data.OtherPlayers);
+        if(data.OtherPlayers!=null) {
+        data.OtherPlayers.forEach(function(playerData) {
+            manager.createOtherPlayers(playerData);
+          });
+        }
+        
+        
+    }
+
     manager.adana = 1;
 
     //manager.handleComingData = (jsonData) => {
@@ -46,15 +83,21 @@ let CreateMPManager = (app) => {
         }
         */
        console.log("Before switch");
-        switch (comingData.Flag) {
+        switch (comingData.Mtype) {
             case 0:
-            manager.drawObject(comingData)
+            manager.updateGame(comingData);
             break;
             case 1:
-            manager.updateGame(comingData)
+            manager.createFire(comingData);
             break;
             case 2:
+            manager.createPlayer(comingData);
+            break;
+            case 3:
             manager.destroyObject(comingData)
+            break;
+            case 4:
+            manager.createGame(comingData);
             break;
             default:
             break;

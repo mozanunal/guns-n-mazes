@@ -43,6 +43,8 @@ function Man(app, x, y, rotation) {
     man.vx = 0;
     man.vy = 0;
 
+    
+
     man.avatar.anchor.set(0.5);
     man.avatar.position.set(0,0);
 

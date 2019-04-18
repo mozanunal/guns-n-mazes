@@ -57,6 +57,10 @@ function onAssetsLoaded() {
         MP.handleComingData(msg);
     };
 
+    app.sendStatePack = (state) => {
+        let pkg = JSON.stringify(state);
+        conn.send(pkg);
+    };
 
    // var playerMan = PlayerMan(app, app.screen.width / 2, app.screen.height / 2, 0);
     //var playerMan = PlayerMan(app, app.screen.width / 2, (app.screen.height / 2)-50, 0);
@@ -81,6 +85,7 @@ function onAssetsLoaded() {
 
     GAME_STATE = GS_ACTIVE;
 
+    var multi = true;
 
     var sinner = 0;
     app.stage.isShaking = false;
@@ -97,6 +102,18 @@ function onAssetsLoaded() {
             var t2 = performance.now;
             //console.log("One tick", (t2-t1));
         }
+        if(multi) {
+            if(app.playerMan != undefined) {
+                var state = { "PosX":app.playerMan.x,
+                              "PosY":app.playerMan.y,
+                              "Vx":app.playerMan.vx,
+                              "Vy":app.playerMan.vy,
+                              "Rot":app.playerMan.rotation
+                            };
+                app.sendStatePack(state);
+            }
+
+        }
         //playerMan.objCollider();
         //For shake the screen
         if(app.stage.isShaking) {
@@ -106,6 +123,7 @@ function onAssetsLoaded() {
                 app.stage.position.set(app.screen.width / 2, app.screen.height / 2);
                 sinner = 0;
                 app.stage.isShaking = false;
+                
             }
         }
         
