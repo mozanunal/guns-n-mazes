@@ -73,6 +73,7 @@ function onAssetsLoaded() {
     var man1 = Man(app, 200, 200, 0);
     app.stage.addChild(man1);
 
+    
     f = man1.fire();
 
     app.stage.position.set(app.screen.width / 2, app.screen.height / 2);

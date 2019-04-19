@@ -9,33 +9,49 @@ let CreateMPManager = (app) => {
     //manager.stage = stage;
     var players = {};
     manager.destroyObject = (data) => {
-        
+        if(data.Player!=undefined&&data.Player!=null) {
+            if(players[data.Id]!=undefined) { 
+                players[data.Id].destroy();
+                //console.log("Player is destroyed");
+                //console.log(players[data.Id]);
+            }
+        }
     }
     manager.updateGame = (data)=> {
+        
         var playerDatas = data.Players;
         if(data.Players!=undefined&&data.Players!=null) {
         playerDatas.forEach(function(playerData) {
-            players[playerData.Id].x = playerData.PlayerData.PosX;
-            players[playerData.Id].y = playerData.PlayerData.PosY;
-            players[playerData.Id].vx = playerData.PlayerData.Vx;
-            players[playerData.Id].vy = playerData.PlayerData.Vy;
-            players[playerData.Id].rotation = playerData.PlayerData.Rot;
+            //console.log(playerData);
+            if(players[playerData.Id]!=undefined) {
+            players[playerData.Id].x = playerData.PosX;
+            players[playerData.Id].y = playerData.PosY;
+            players[playerData.Id].vx = playerData.Vx;
+            players[playerData.Id].vy = playerData.Vy;
+            players[playerData.Id].rotation = playerData.Rot;
+            }
           });
         }
+        
     }
     
     manager.createFire = (data)=>{
     }
     manager.createPlayer = (data)=> {
-        if(data.IsOwner) {
-            let yourPlayer = sPlayerMan(app, data.PosX, data.PosY, 0);
+        console.log(data);
+
+        if(data.IsOwner==true) {
+            let yourPlayer = sPlayerMan(app, data.Player.PosX, data.Player.PosY, 0);
             app.stage.addChild(yourPlayer);
             app.playerMan = yourPlayer;
             players[data.Id] = app.playerMan;
+            console.log("Create player man");
         } else {
-            let newPlayer = sMan(app, data.PosX, data.PosY, 0);
+            let newPlayer = sMan(app,  data.Player.PosX, data.Player.PosY, 0);
             app.stage.addChild(newPlayer);
             players[data.Id]=newPlayer;
+            console.log("Create man");
+
         } 
     }
     manager.createOwnPlayer = (data) =>{
@@ -43,12 +59,16 @@ let CreateMPManager = (app) => {
             app.stage.addChild(yourPlayer);
             app.playerMan = yourPlayer;
             players[data.Id] = app.playerMan;
+            console.log("Create player man");
+
 
     }
     manager.createOtherPlayers = (data)=>{
             let newPlayer = sMan(app, data.PosX, data.PosY, 0);
             app.stage.addChild(newPlayer);
             players[data.Id]=newPlayer;
+            console.log("Create man");
+
     }
     manager.createGame = (data)=>{
         manager.createOwnPlayer(data.Player);
