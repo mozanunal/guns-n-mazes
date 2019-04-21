@@ -32,7 +32,7 @@ function man(app, x, y, rotation , manager) { //Old style without connection
         man.ammo--;
         var X = man.x + calc.getAngleX(70, man.rotation + calc.degree2Radian(40));
         var Y = man.y + calc.getAngleY(70, man.rotation + calc.degree2Radian(40));
-        var fireRequest = {"x":X, "y":Y, "rot":man.rotation};
+        var fireRequest = {"PosX":X, "PosY":Y, "Rot":man.rotation};
         app.requestFire(fireRequest);
         }
     }

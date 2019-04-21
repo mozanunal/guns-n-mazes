@@ -30,6 +30,9 @@ let CreateMPManager = (app) => {
             players[playerData.Id].vx = playerData.Vx;
             players[playerData.Id].vy = playerData.Vy;
             players[playerData.Id].rotation = playerData.Rot;
+            //players[playerData.Id].health = playerData.Health;
+            //players[playerData.Id].ammo = playerData.Ammo;
+
             }
           });
         }
