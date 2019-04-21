@@ -11,8 +11,8 @@ let CreateMPManager = (app) => {
     var players = {};
     manager.destroyObject = (data) => {
         if(data.Player!=undefined&&data.Player!=null) {
-            if(players[data.Id]!=undefined) { 
-                players[data.Id].destroy();
+            if(players[data.Player.Id]!=undefined) { 
+                players[data.Player.Id].destroy();
                 //console.log("Player is destroyed");
                 //console.log(players[data.Id]);
             }
