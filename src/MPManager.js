@@ -39,23 +39,28 @@ let CreateMPManager = (app) => {
         
     }
     manager.createFire = (data)=>{
+        console.log(data);
+        console.log("fire creating");
         var newFire = Fire(app, data.X, data.Y, data.Rot);
     }
     
     manager.createPlayer = (data)=> {
-        console.log(data);
+        //console.log(data);
 
         if(data.IsOwner==true) {
             let yourPlayer = sPlayerMan(app, data.Player.PosX, data.Player.PosY, 0, manager);
             app.stage.addChild(yourPlayer);
             app.playerMan = yourPlayer;
-            players[data.Id] = app.playerMan;
-            console.log("Create player man");
+            players[data.Player.Id] = app.playerMan;
+            //console.log("Create player man");
         } else {
+            //console.log(data);
+            //console.log("draw"+data.Player.Id);
+
             let newPlayer = sMan(app,  data.Player.PosX, data.Player.PosY, 0);
             app.stage.addChild(newPlayer);
-            players[data.Id]=newPlayer;
-            console.log("Create man");
+            players[data.Player.Id]=newPlayer;
+           //console.log("Create man");
 
         } 
     }
@@ -64,7 +69,7 @@ let CreateMPManager = (app) => {
             app.stage.addChild(yourPlayer);
             app.playerMan = yourPlayer;
             players[data.Id] = app.playerMan;
-            console.log("Create player man");
+           // console.log("Create player man");
 
 
     }
@@ -72,7 +77,7 @@ let CreateMPManager = (app) => {
             let newPlayer = sMan(app, data.PosX, data.PosY, 0);
             app.stage.addChild(newPlayer);
             players[data.Id]=newPlayer;
-            console.log("Create man");
+            //console.log("Create man");
 
     }
     manager.createGame = (data)=>{
@@ -93,8 +98,8 @@ let CreateMPManager = (app) => {
     manager.handleComingData = (jsonData) => {
         jsonData = jsonData.data;
 
-        console.log(jsonData);
-        console.log("Before parse");
+        //console.log(jsonData);
+        //console.log("Before parse");
 
         let comingData = JSON.parse(jsonData);
         /*
@@ -107,7 +112,7 @@ let CreateMPManager = (app) => {
             
         }
         */
-       console.log("Before switch");
+      // console.log("Before switch");
         switch (comingData.Mtype) {
             case 0:
             manager.updateGame(comingData);

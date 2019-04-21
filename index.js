@@ -53,7 +53,7 @@ function onAssetsLoaded() {
     }
 
     conn.onmessage = (msg)=>{
-        console.log("Hey msg came");
+        //console.log("Hey msg came");
         MP.handleComingData(msg);
     };
 
@@ -95,6 +95,8 @@ function onAssetsLoaded() {
 
     var multi = true;
 
+    app.stateCounter = 0;
+
     var sinner = 0;
     app.stage.isShaking = false;
     // Animate the rotation
@@ -118,7 +120,11 @@ function onAssetsLoaded() {
                               "Vy":app.playerMan.vy,
                               "Rot":app.playerMan.rotation
                             };
+                //if(app.stateCounter>1) {
                 app.sendStatePack(state);
+                //app.stateCounter=0;
+                //}
+                //app.stateCounter+=1;
             }
 
         }
