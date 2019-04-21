@@ -3,6 +3,7 @@
 
 const Fire = require('./fire');
 const calc = require('../misc/calculation');
+const HealthBar = require('./healthBar');
 
 
 const SPEED = 10;
@@ -55,9 +56,18 @@ function Man(app, x, y, rotation) {
     man.feet.position.set(0,-25);
     man.feet.zOrder = 1;
 
+
+
     man.tag = "man";
 
     man.health = 100;
+
+    
+    var healthBar = HealthBar();
+    man.healthBar = healthBar;
+    man.addChild(man.healthBar);
+
+    
     man.takeDamage = (amount) => {
         man.health -= amount;
         if(man.health<=0) {
@@ -65,6 +75,7 @@ function Man(app, x, y, rotation) {
             console.log("dead");
             man.destroy();
         }
+        man.healthBar.setHealth(man.health);
         console.log(man.health);
     } 
 
