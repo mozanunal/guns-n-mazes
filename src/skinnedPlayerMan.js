@@ -6,12 +6,16 @@ const keyboard = require('../misc/keyboard');
 const Mouse = require('pixi.js-mouse');
 const collision = require('./collision');
 const ManBase = require('./skinnedMan');
+const connection = require('./connection');
 const MOVEMENT_VEL = 4;
 
-function man(app, x, y, rotation) {
+function man(app, x, y, rotation) { //Old style without connection
+//function man(app, x, y, rotation,conn) {
     
     //let man = new PIXI.extras.AnimatedSprite(walk, stop);
     let man = ManBase(app, x,y, rotation);
+
+    //man.conn = conn; //Assign connection
 
     man.ammo = 6;
     man.fire = function () {
@@ -33,6 +37,16 @@ function man(app, x, y, rotation) {
         }
     }
 
+    man.tag = "PlayerMan";
+    man.id=0; //Default id 0
+    let manPacker = (ma)=> {
+        return{"id":ma.id,"posX":ma.x,"posY":ma.y,"vx":ma.vx,"vy":ma.vy,"timeStamp":Math.floor(Date.now())};
+       //return{"id":ma.id,"posX":ma.x,"posY":ma.y,"vx":ma.vx,"vy":ma.vy,"timeStamp":Math.floor(Performance.now() / 1000)};
+
+    }
+
+    //let conn = connection();
+
     man.objTick = function (delta) {
         man.rotation = calc.getAngleTo(app.screen.width / 2, app.screen.height / 2, Mouse.getPosX(), Mouse.getPosY() );
         man.ammoFiller(delta);
@@ -44,6 +58,16 @@ function man(app, x, y, rotation) {
         }
         man.x += man.vx * delta;
         man.y += man.vy * delta;
+
+        /*
+        try{
+        //conn.send(man.vx);
+        man.conn.sendObject(manPacker(man));
+        }
+        catch(err) {
+
+        }
+        */
     }
     man.colCounter = 0;
 
@@ -106,12 +130,13 @@ function man(app, x, y, rotation) {
        // console.log( playerMan.position.x, playerMan.position.y );
         man.fire();
         //console.log(man.width,man.height);
-        //console.log(app.stage.children);
+        console.log(app.stage.children);
+        //console.log(app.stage);
         //app.stage.isShaking = true;
 
     });
 
-    app.stage.addChild(man);
+    //app.stage.addChild(man);
     return man;
 
 }

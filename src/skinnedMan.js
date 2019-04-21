@@ -43,6 +43,8 @@ function Man(app, x, y, rotation) {
     man.vx = 0;
     man.vy = 0;
 
+    
+
     man.avatar.anchor.set(0.5);
     man.avatar.position.set(0,0);
 
@@ -78,6 +80,7 @@ function Man(app, x, y, rotation) {
     man.ammo = 6;
     man.fire = function () {
         if(man.ammo>0) {
+            console.log(app.stage);
             man.ammo--;
             var X = man.x + calc.getAngleX(70, man.rotation + calc.degree2Radian(40));
             var Y = man.y + calc.getAngleY(70, man.rotation + calc.degree2Radian(40));
@@ -105,7 +108,7 @@ function Man(app, x, y, rotation) {
         man.x += man.vx * delta;
         man.y += man.vy * delta;
     }
-    app.stage.addChild(man);
+    //app.stage.addChild(man);
     return man;
 
 }
