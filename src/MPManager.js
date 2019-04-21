@@ -41,7 +41,7 @@ let CreateMPManager = (app) => {
     manager.createFire = (data)=>{
         console.log(data);
         console.log("fire creating");
-        var newFire = Fire(app, data.X, data.Y, data.Rot);
+        var newFire = Fire(app, data.PosX, data.PosY, data.Rot);
     }
     
     manager.createPlayer = (data)=> {
