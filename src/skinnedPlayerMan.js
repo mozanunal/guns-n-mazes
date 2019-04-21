@@ -7,9 +7,10 @@ const Mouse = require('pixi.js-mouse');
 const collision = require('./collision');
 const ManBase = require('./skinnedMan');
 const connection = require('./connection');
+//const manager = require('./MPManager');
 const MOVEMENT_VEL = 4;
 
-function man(app, x, y, rotation) { //Old style without connection
+function man(app, x, y, rotation , manager) { //Old style without connection
 //function man(app, x, y, rotation,conn) {
     
     //let man = new PIXI.extras.AnimatedSprite(walk, stop);
@@ -19,11 +20,20 @@ function man(app, x, y, rotation) { //Old style without connection
 
     man.ammo = 6;
     man.fire = function () {
+        /*
         if(man.ammo>0) {
             man.ammo--;
             var X = man.x + calc.getAngleX(70, man.rotation + calc.degree2Radian(40));
             var Y = man.y + calc.getAngleY(70, man.rotation + calc.degree2Radian(40));
             return Fire(app, X, Y, man.rotation);
+        }
+        */
+       if(man.ammo>0) {
+        man.ammo--;
+        var X = man.x + calc.getAngleX(70, man.rotation + calc.degree2Radian(40));
+        var Y = man.y + calc.getAngleY(70, man.rotation + calc.degree2Radian(40));
+        var fireRequest = {"x":X, "y":Y, "rot":man.rotation};
+        app.requestFire(fireRequest);
         }
     }
     man.timeCounter2 = 0;

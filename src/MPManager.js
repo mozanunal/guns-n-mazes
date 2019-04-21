@@ -1,5 +1,6 @@
 const sMan = require('./skinnedMan');
 const sPlayerMan = require('./skinnedPlayerMan');
+const Fire = require('./fire');
 
 let CreateMPManager = (app) => {
 
@@ -34,14 +35,15 @@ let CreateMPManager = (app) => {
         }
         
     }
-    
     manager.createFire = (data)=>{
+        var newFire = Fire(app, data.X, data.Y, data.Rot);
     }
+    
     manager.createPlayer = (data)=> {
         console.log(data);
 
         if(data.IsOwner==true) {
-            let yourPlayer = sPlayerMan(app, data.Player.PosX, data.Player.PosY, 0);
+            let yourPlayer = sPlayerMan(app, data.Player.PosX, data.Player.PosY, 0, manager);
             app.stage.addChild(yourPlayer);
             app.playerMan = yourPlayer;
             players[data.Id] = app.playerMan;
