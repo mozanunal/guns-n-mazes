@@ -58,13 +58,13 @@ function onAssetsLoaded() {
     };
 
     app.sendStatePack = (state) => {
-        state.MType = 5; 
+        state.Mtype = 5; 
         let pkg = JSON.stringify(state);
         conn.send(pkg);
     };
 
     app.requestFire = (fireData) => {
-        fireData.MType = 6;
+        fireData.Mtype = 6;
         let pkg = JSON.stringify(fireData);
         conn.send(pkg);
     };
